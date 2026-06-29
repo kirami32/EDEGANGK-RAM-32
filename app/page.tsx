@@ -48,19 +48,16 @@ const GALLERY_GRID = [
 export default function Home() {
   const [introComplete, setIntroComplete] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; cap: string } | null>(null);
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
   }, []);
 
-  // Mobil menü açıkken scroll kilitle
+  // Mobil menü kilidi (sadece class ile veya touch-action ile halledeceğiz)
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
+    // Body overflow iptal edildi çünkü iOS'ta takılmalara neden oluyor.
+    // CSS tarafında mobile-nav ve overlay ile çözüldü.
   }, [menuOpen]);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
@@ -167,8 +164,8 @@ export default function Home() {
               <div className="cinema-row cinema-row--left">
                 <div className="cinema-track">
                   {[...MARQUEE_ROW_1, ...MARQUEE_ROW_1, ...MARQUEE_ROW_1].map((img, i) => (
-                    <div key={`r1-${i}`} className="cinema-slide">
-                      <div className="cinema-img" style={{ backgroundImage: `url(${img.src})`, backgroundPosition: img.pos }}>
+                    <div key={`r1-${i}`} className="cinema-slide" onClick={() => setLightboxImage(img)}>
+                      <div className="cinema-img" style={{ backgroundImage: `url(${img.src})`, backgroundPosition: img.pos, cursor: "pointer" }}>
                         <div className="cinema-overlay" />
                         <span className="cinema-cap">{img.cap}</span>
                       </div>
@@ -181,8 +178,8 @@ export default function Home() {
               <div className="cinema-row cinema-row--right">
                 <div className="cinema-track">
                   {[...MARQUEE_ROW_2, ...MARQUEE_ROW_2, ...MARQUEE_ROW_2].map((img, i) => (
-                    <div key={`r2-${i}`} className="cinema-slide">
-                      <div className="cinema-img" style={{ backgroundImage: `url(${img.src})`, backgroundPosition: img.pos }}>
+                    <div key={`r2-${i}`} className="cinema-slide" onClick={() => setLightboxImage(img)}>
+                      <div className="cinema-img" style={{ backgroundImage: `url(${img.src})`, backgroundPosition: img.pos, cursor: "pointer" }}>
                         <div className="cinema-overlay" />
                         <span className="cinema-cap">{img.cap}</span>
                       </div>
@@ -269,6 +266,17 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div className="lightbox" onClick={() => setLightboxImage(null)}>
+          <button className="lightbox-close" onClick={() => setLightboxImage(null)}>×</button>
+          <div className="lightbox-img-wrap" onClick={(e) => e.stopPropagation()}>
+            <img src={lightboxImage.src} alt={lightboxImage.cap} className="lightbox-img" />
+            <div className="lightbox-cap">{lightboxImage.cap}</div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

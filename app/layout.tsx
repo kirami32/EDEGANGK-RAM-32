@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     type: "website",
     images: ["/img/duo.jpg"],
   },
+  icons: {
+    icon: "/img/neon.jpg",
+  },
 };
 
 export const viewport: Viewport = {

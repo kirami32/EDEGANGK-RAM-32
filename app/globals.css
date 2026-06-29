@@ -18,16 +18,16 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
+html, body {
+  margin: 0;
+  padding: 0;
   background: var(--ink);
-  color: var(--cream);
+  color: #fff;
   font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
   overflow-x: hidden;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -212,7 +212,7 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1625,7 +1625,7 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 55;
+  z-index: 90;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -1645,7 +1645,7 @@ a {
   background: rgba(10, 10, 10, 0.96);
   backdrop-filter: blur(20px);
   border-left: 1px solid rgba(225, 18, 18, 0.2);
-  z-index: 56;
+  z-index: 95;
   flex-direction: column;
   padding: 90px 30px 40px;
   gap: 0;
@@ -1729,9 +1729,11 @@ a {
   .modal-card {
     border-radius: 14px;
     padding: clamp(16px, 4vw, 28px);
-    max-height: 94svh;
+    padding-top: 36px;
+    max-height: 90svh;
   }
-  .modal-head { gap: 14px; }
+  .modal-kicker { padding-right: 32px; }
+  .modal-head { gap: 14px; margin-top: 10px; }
   .modal-photo {
     width: 80px;
     height: 100px;
@@ -1980,6 +1982,51 @@ a {
 @keyframes creditPulse {
   0% { text-shadow: 0 0 8px var(--red-glow), 0 0 16px var(--red); }
   100% { text-shadow: 0 0 16px var(--red-glow), 0 0 32px var(--red), 0 0 40px var(--red-deep); }
+}
+
+/* ============ Lightbox ============ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  animation: fade 0.3s forwards;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 201;
+}
+.lightbox-img-wrap {
+  position: relative;
+  max-width: 90vw;
+  max-height: 80vh;
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+}
+.lightbox-cap {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: var(--red-glow);
 }
 
 /* ============ GPU Acceleration Hints ============ */
