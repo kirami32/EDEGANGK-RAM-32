@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:trenchwerk.webflow.io)",
+      "WebFetch(domain:voski1.webflow.io)",
+      "WebFetch(domain:fryenation.webflow.io)",
+      "Bash(npm -v)",
+      "Bash(command -v magick)",
+      "Bash(command -v convert)",
+      "Bash(npm install *)",
+      "Bash(node -e \"console.log\\('next', require\\('./node_modules/next/package.json'\\).version\\)\")",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000)",
+      "Bash(curl -s http://localhost:3000)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Read(//c/Program Files/Microsoft/Edge/Application/**)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless --disable-gpu --hide-scrollbars --window-size=1440,900 --screenshot=\"shot-desktop.png\" \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=1440,900 --screenshot=shot-desktop.png \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=1440,900 \"--screenshot=C:\\\\Users\\\\burak\\\\Desktop\\\\rap\\\\shot-desktop.png\" \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=1440,3400 \"--screenshot=C:\\\\Users\\\\burak\\\\Desktop\\\\rap\\\\shot-full.png\" \"http://localhost:3000\")"
+    ]
+  }
+}
