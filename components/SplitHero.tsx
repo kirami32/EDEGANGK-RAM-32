@@ -77,6 +77,9 @@ function RapperModal({ rapper, onClose }: { rapper: Rapper; onClose: () => void 
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
 
+    // Arka plan beat'ini durdur (Spotify ile çakışmasın)
+    window.dispatchEvent(new CustomEvent("edegang:pauseBeat"));
+
     // GSAP Modal Animation
     gsap.fromTo(
       ".modal-card",
@@ -87,6 +90,8 @@ function RapperModal({ rapper, onClose }: { rapper: Rapper; onClose: () => void 
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      // Modal kapandığında arka plan beat'ini devam ettir
+      window.dispatchEvent(new CustomEvent("edegang:resumeBeat"));
     };
   }, [onClose]);
 

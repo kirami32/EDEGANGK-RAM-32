@@ -12,37 +12,37 @@ import { CREW_SOCIALS } from "@/data/crew";
 
 /* ── Kayan şerit için resimler (2 şerit, zıt yönler) ── */
 const MARQUEE_ROW_1 = [
-  { src: "/img/duo.jpg", cap: "STÜDYO" },
-  { src: "/img/oski-water.jpg", cap: "OSKİ" },
-  { src: "/img/cherubs.jpg", cap: "CONCEPTUAL [78]" },
-  { src: "/img/neon.jpg", cap: "NEON" },
-  { src: "/img/mercedes.jpg", cap: "EDEGANG / W123" },
-  { src: "/img/nokia.jpg", cap: "OLD SCHOOL" },
+  { src: "/img/duo.jpg", cap: "STÜDYO", pos: "center 20%" },
+  { src: "/img/oski-water.jpg", cap: "OSKİ", pos: "center 15%" },
+  { src: "/img/cherubs.jpg", cap: "CONCEPTUAL [78]", pos: "center 25%" },
+  { src: "/img/neon.jpg", cap: "NEON", pos: "center" },
+  { src: "/img/mercedes.jpg", cap: "EDEGANG / W123", pos: "center 40%" },
+  { src: "/img/nokia.jpg", cap: "OLD SCHOOL", pos: "center" },
 ];
 
 const MARQUEE_ROW_2 = [
-  { src: "/img/zuhruf-blue.jpg", cap: "ZUHRUF" },
-  { src: "/img/elevator.jpg", cap: "KAHRAMANMARAŞ" },
-  { src: "/img/oski-cat.jpg", cap: "BACKSTAGE" },
-  { src: "/img/tattoo.jpg", cap: "FOR LIFE" },
-  { src: "/img/oski.jpg", cap: "OSKİ PORTRAIT" },
-  { src: "/img/zuhruf.jpg", cap: "ZUHRUF PORTRAIT" },
+  { src: "/img/zuhruf-blue.jpg", cap: "ZUHRUF", pos: "center 10%" },
+  { src: "/img/elevator.jpg", cap: "KAHRAMANMARAŞ", pos: "center 20%" },
+  { src: "/img/oski-cat.jpg", cap: "BACKSTAGE", pos: "center 15%" },
+  { src: "/img/tattoo.jpg", cap: "FOR LIFE", pos: "center 30%" },
+  { src: "/img/oski.jpg", cap: "OSKİ PORTRAIT", pos: "center 10%" },
+  { src: "/img/zuhruf.jpg", cap: "ZUHRUF PORTRAIT", pos: "center 10%" },
 ];
 
 /* ── Masonry grid galeri ── */
 const GALLERY_GRID = [
-  { src: "/img/duo.jpg", cap: "STÜDYO", size: "wide" },
-  { src: "/img/oski-water.jpg", cap: "OSKİ", size: "tall" },
-  { src: "/img/zuhruf-blue.jpg", cap: "ZUHRUF", size: "normal" },
-  { src: "/img/cherubs.jpg", cap: "CONCEPTUAL LAYOUT [78]", size: "normal" },
-  { src: "/img/oski-cat.jpg", cap: "BACKSTAGE", size: "tall" },
-  { src: "/img/elevator.jpg", cap: "KAHRAMANMARAŞ", size: "wide" },
-  { src: "/img/mercedes.jpg", cap: "EDEGANG / W123", size: "normal" },
-  { src: "/img/neon.jpg", cap: "NEON", size: "normal" },
-  { src: "/img/tattoo.jpg", cap: "FOR LIFE", size: "tall" },
-  { src: "/img/nokia.jpg", cap: "OLD SCHOOL", size: "normal" },
-  { src: "/img/oski.jpg", cap: "OSKİ PORTRAIT", size: "normal" },
-  { src: "/img/zuhruf.jpg", cap: "ZUHRUF PORTRAIT", size: "wide" },
+  { src: "/img/duo.jpg", cap: "STÜDYO", size: "wide", pos: "center 20%" },
+  { src: "/img/oski-water.jpg", cap: "OSKİ", size: "tall", pos: "center 15%" },
+  { src: "/img/zuhruf-blue.jpg", cap: "ZUHRUF", size: "normal", pos: "center 10%" },
+  { src: "/img/cherubs.jpg", cap: "CONCEPTUAL LAYOUT [78]", size: "normal", pos: "center 25%" },
+  { src: "/img/oski-cat.jpg", cap: "BACKSTAGE", size: "tall", pos: "center 15%" },
+  { src: "/img/elevator.jpg", cap: "KAHRAMANMARAŞ", size: "wide", pos: "center 20%" },
+  { src: "/img/mercedes.jpg", cap: "EDEGANG / W123", size: "normal", pos: "center 40%" },
+  { src: "/img/neon.jpg", cap: "NEON", size: "normal", pos: "center" },
+  { src: "/img/tattoo.jpg", cap: "FOR LIFE", size: "tall", pos: "center 30%" },
+  { src: "/img/nokia.jpg", cap: "OLD SCHOOL", size: "normal", pos: "center" },
+  { src: "/img/oski.jpg", cap: "OSKİ PORTRAIT", size: "normal", pos: "center 10%" },
+  { src: "/img/zuhruf.jpg", cap: "ZUHRUF PORTRAIT", size: "wide", pos: "center 10%" },
 ];
 
 export default function Home() {
@@ -168,7 +168,7 @@ export default function Home() {
                 <div className="cinema-track">
                   {[...MARQUEE_ROW_1, ...MARQUEE_ROW_1, ...MARQUEE_ROW_1].map((img, i) => (
                     <div key={`r1-${i}`} className="cinema-slide">
-                      <div className="cinema-img" style={{ backgroundImage: `url(${img.src})` }}>
+                      <div className="cinema-img" style={{ backgroundImage: `url(${img.src})`, backgroundPosition: img.pos }}>
                         <div className="cinema-overlay" />
                         <span className="cinema-cap">{img.cap}</span>
                       </div>
@@ -182,7 +182,7 @@ export default function Home() {
                 <div className="cinema-track">
                   {[...MARQUEE_ROW_2, ...MARQUEE_ROW_2, ...MARQUEE_ROW_2].map((img, i) => (
                     <div key={`r2-${i}`} className="cinema-slide">
-                      <div className="cinema-img" style={{ backgroundImage: `url(${img.src})` }}>
+                      <div className="cinema-img" style={{ backgroundImage: `url(${img.src})`, backgroundPosition: img.pos }}>
                         <div className="cinema-overlay" />
                         <span className="cinema-cap">{img.cap}</span>
                       </div>
@@ -190,26 +190,6 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-            </div>
-
-            {/* ── 2) Masonry Grid Galeri ── */}
-            <h3 className="gallery-grid-heading">
-              <span className="gallery-grid-line" />
-              TÜM KARELER
-              <span className="gallery-grid-line" />
-            </h3>
-
-            <div className="masonry-grid">
-              {GALLERY_GRID.map((g, idx) => (
-                <figure key={g.src} className={`masonry-card masonry-card--${g.size}`} data-index={idx}>
-                  <div className="masonry-img" style={{ backgroundImage: `url(${g.src})` }} />
-                  <div className="masonry-shine" />
-                  <figcaption className="masonry-caption">
-                    <span className="masonry-cap-line" />
-                    {g.cap}
-                  </figcaption>
-                </figure>
-              ))}
             </div>
           </section>
 

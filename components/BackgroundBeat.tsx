@@ -132,6 +132,35 @@ export default function BackgroundBeat() {
     }
   }, [isPlaying, volume]);
 
+  // Spotify modal açıldığında beat'i durdur, kapandığında devam ettir
+  const wasPlayingRef = useRef(false);
+
+  useEffect(() => {
+    const handlePause = () => {
+      if (isPlaying && playerRef.current) {
+        wasPlayingRef.current = true;
+        playerRef.current.pauseVideo();
+        setIsPlaying(false);
+      }
+    };
+    const handleResume = () => {
+      if (wasPlayingRef.current && playerRef.current) {
+        wasPlayingRef.current = false;
+        playerRef.current.unMute();
+        playerRef.current.setVolume(volume);
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+      }
+    };
+
+    window.addEventListener("edegang:pauseBeat", handlePause);
+    window.addEventListener("edegang:resumeBeat", handleResume);
+    return () => {
+      window.removeEventListener("edegang:pauseBeat", handlePause);
+      window.removeEventListener("edegang:resumeBeat", handleResume);
+    };
+  }, [isPlaying, volume]);
+
   const handleVolumeChange = useCallback((newVol: number) => {
     const clamped = Math.max(0, Math.min(100, Math.round(newVol)));
     setVolume(clamped);
