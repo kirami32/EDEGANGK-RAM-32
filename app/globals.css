@@ -68,7 +68,6 @@ a {
   justify-content: center;
   gap: 8vw;
   opacity: 0.28;
-  filter: blur(0.2px);
   transition: opacity 2s ease;
 }
 
@@ -97,6 +96,7 @@ a {
   border-radius: 50%;
   background: repeating-radial-gradient(circle, #050505 0 2px, #141414 2px 4px);
   animation: spin 1.8s linear infinite;
+  will-change: transform;
 }
 .groove {
   position: absolute;
@@ -130,6 +130,7 @@ a {
   height: 46%;
   transform-origin: top right;
   animation: scratch 1.6s ease-in-out infinite;
+  will-change: transform;
 }
 .arm {
   position: absolute;
@@ -1860,6 +1861,14 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .vinyl, .tonearm, .marquee, .dj-vinyl, .cinema-track { animation: none; }
   html { scroll-behavior: auto; }
+}
+
+/* Sekme arka plandayken sürekli animasyonları durdur (CPU/GPU tasarrufu) */
+body.tab-hidden .vinyl,
+body.tab-hidden .tonearm,
+body.tab-hidden .marquee,
+body.tab-hidden .cinema-track {
+  animation-play-state: paused;
 }
 
 /* ============ Intro Animasyonu ============ */

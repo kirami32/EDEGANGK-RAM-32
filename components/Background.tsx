@@ -18,6 +18,15 @@ export default function Background() {
     return () => v.removeEventListener("loadeddata", onOk);
   }, []);
 
+  // Sekme arka plana geçince sürekli çalışan dekoratif animasyonları durdur
+  useEffect(() => {
+    const onVisibility = () => {
+      document.body.classList.toggle("tab-hidden", document.hidden);
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
   return (
     <div className="bg" aria-hidden="true">
       {/* Opsiyonel loop video */}

@@ -161,6 +161,17 @@ export default function BackgroundBeat() {
     };
   }, [isPlaying, volume]);
 
+  // Sekme arka plandayken gizli YouTube videosunun decode edilmesini durdur
+  useEffect(() => {
+    const onVisibility = () => {
+      window.dispatchEvent(
+        new CustomEvent(document.hidden ? "edegang:pauseBeat" : "edegang:resumeBeat")
+      );
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
   const handleVolumeChange = useCallback((newVol: number) => {
     const clamped = Math.max(0, Math.min(100, Math.round(newVol)));
     setVolume(clamped);
