@@ -27,7 +27,7 @@ await sharp(path.join(SRC, "oski-1.png"))
   .toFile(path.join(OUT, "oski.jpg"));
 
 await sharp(path.join(SRC, "zuhruf-2.jpeg"))
-  .extract({ left: 0, top: 232, width: 921, height: 2048 - 232 - 253 }) // üst status bar/başlık + alt altyazı kırpıldı
+  .extract({ left: 0, top: 880, width: 921, height: 1795 - 880 }) // kafa üstte kalsın diye boş sahne alanı da kırpıldı
   .jpeg({ quality: 92 })
   .toFile(path.join(OUT, "zuhruf.jpg"));
 
