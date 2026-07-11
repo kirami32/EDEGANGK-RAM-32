@@ -19,25 +19,16 @@ const src = (k) => path.join(SRC, files[k]);
 
 await mkdir(OUT, { recursive: true });
 
-// 1) İkili görseli iki figüre böl: sol = Oski, sağ = Zuhruf (her figür kendi karesinde ortalı)
-const duoMeta = await sharp(src("duo")).metadata();
-const W = duoMeta.width;
-const H = duoMeta.height;
-const win = Math.round(W * 0.5); // pencere genişliği
-const clamp = (v, max) => Math.max(0, Math.min(v, max));
-
-// Oski (soldaki kapüşonlu figür ~ x merkez %36)
-const oskiLeft = clamp(Math.round(W * 0.36 - win / 2), W - win);
-await sharp(src("duo"))
-  .extract({ left: oskiLeft, top: 0, width: win, height: H })
-  .jpeg({ quality: 90 })
+// 1) Oski & Zuhruf hero portreleri — yüksek çözünürlüklü kaynaklardan,
+//    Instagram ekran görüntüsü UI'ı (status bar/başlık/altyazı/carousel ikonları) kırpılarak.
+await sharp(path.join(SRC, "oski-1.png"))
+  .extract({ left: 0, top: 0, width: 787 - 40, height: 531 - 16 }) // sağdaki ok ikonu + alt nokta göstergesi kırpıldı
+  .jpeg({ quality: 92 })
   .toFile(path.join(OUT, "oski.jpg"));
 
-// Zuhruf (sağdaki maskeli figür ~ x merkez %60, "edegang" yazısı da kadrajda)
-const zuhrufLeft = clamp(Math.round(W * 0.62 - win / 2), W - win);
-await sharp(src("duo"))
-  .extract({ left: zuhrufLeft, top: 0, width: win, height: H })
-  .jpeg({ quality: 90 })
+await sharp(path.join(SRC, "zuhruf-2.jpeg"))
+  .extract({ left: 0, top: 232, width: 921, height: 2048 - 232 - 253 }) // üst status bar/başlık + alt altyazı kırpıldı
+  .jpeg({ quality: 92 })
   .toFile(path.join(OUT, "zuhruf.jpg"));
 
 // Tam ikili (hero/og için)

@@ -25,9 +25,16 @@ html, body {
   color: #fff;
   font-family: var(--font-body);
   scroll-behavior: smooth;
-  overflow-x: hidden;
   width: 100%;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Yatay taşmayı sadece html üzerinde engelle. Bunu body'e de eklemek
+   (overflow-x hidden + overflow-y varsayılan) CSS spesifikasyonu geregi
+   body'nin overflow-y'sini de "auto"ya çevirip html ile birlikte iki
+   ayrı scroll konteyneri (çift scrollbar) oluşturuyordu. */
+html {
+  overflow-x: hidden;
 }
 
 a {
@@ -281,6 +288,7 @@ a {
   height: 100svh;
   min-height: 600px;
   width: 100%;
+  contain: layout style;
 }
 
 .panel {
@@ -291,6 +299,7 @@ a {
   background: #0a0606;
   transition: flex-grow 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
   flex-grow: 1;
+  contain: layout paint;
 }
 
 /* odak: aktif panel büyür, diğeri küçülür */
